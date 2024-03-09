@@ -12,9 +12,11 @@ RUN apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies
-COPY ./requirements.txt /tmp/requirements.txt
 RUN pip install --upgrade pip
+COPY ./requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt --no-cache-dir
 
+ARG WORKDIR=/workspace
+WORKDIR ${WORKDIR}
 
 CMD "/bin/bash"
